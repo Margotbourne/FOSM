@@ -12,4 +12,4 @@ class Person:
         return self.__dict__ == other.__dict__
     
     def __repr__(self):
-        return f"Person({self.id}, {self.name}, {self.email}, {self.role}, {self.bio}, {self.image_url})"
+        return f"Person({self.id}, '{self.name}', '{self.email}', '{self.role}', '{self.bio}', '{self.image_url}')"

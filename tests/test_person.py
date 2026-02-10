@@ -18,7 +18,7 @@ We can format persons to strings nicely
 """
 def test_persons_format_nicely():
     person = Person(1, "Test Name", "Test Email", "Test Role", "Test Bio", "Test Image_url")
-    assert str(person) == "Person(1, Test Name, Test Email, Test Role, Test Bio, Test Image_url)"
+    assert str(person) == "Person(1, 'Test Name', 'Test Email', 'Test Role', 'Test Bio', 'Test Image_url')"
     
 
 """

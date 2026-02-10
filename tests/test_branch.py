@@ -26,8 +26,15 @@ def test_braches_format_nicely():
 We can compare two identical branches
 And have them be equal
 """
-def test_branches_are_equal():
-    branch1 = Branch(1, "Test Name", "Test Region-Code", "Test Charity-Number", "Test Address", "Test Email", "Test Currency")
-    branch2 = Branch(1, "Test Name", "Test Region-Code", "Test Charity-Number", "Test Address", "Test Email", "Test Currency")
-    assert branch1 == branch2
+def test_braches_format_nicely():
+    branch = Branch(1, "Test Name", "Test Region-Code", "Test Charity-Number", "Test Address", "Test Email", "Test Currency")
+    assert str(branch) ==  "Branch(id=1, name='Test Name', region='Test Region-Code', charity_no='Test Charity-Number', currency='Test Currency')"
+
+"""
+Test two branches are not equal 
+"""
    
+def test_branches_are_not_equal():
+    branch1 = Branch(1, "Test Name", "Test Region-Code", "Test Charity-Number", "Test Address", "Test Email", "Test Currency")
+    branch2 = Branch(2, "Test Name2", "Test Region-Code2", "Test Charity-Number2", "Test Address2", "Test Email2", "Test Currency2")
+    assert branch1 != branch2

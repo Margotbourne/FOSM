@@ -9,4 +9,4 @@ class Program:
         return self.__dict__ == other.__dict__
     
     def __repr__(self):
-        return f"Supporter({self.id}, {self.name}, {self.description}"
+        return f"Program({self.id}, '{self.name}', '{self.description}')"

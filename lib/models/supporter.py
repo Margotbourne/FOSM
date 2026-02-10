@@ -12,4 +12,4 @@ class Supporter:
         return self.__dict__ == other.__dict__
     
     def __repr__(self):
-        return f"Supporter({self.id}, {self.name}, {self.email}, {self.is_gift_aid_eligible}, {self.marketing_consent}, {self.total_donated})"
+        return f"Supporter({self.id}, '{self.name}', '{self.email}', {self.is_gift_aid_eligible}, {self.marketing_consent}, {self.total_donated})"

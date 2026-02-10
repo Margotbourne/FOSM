@@ -13,11 +13,21 @@ def test_project_constructs():
 
 
 """
+Test impact statment 
+"""
+def test_impact_statemnt():
+     project = Project(1, "Test Name", "Test Program_ID", "Test Benificaries", "Test Is_Active")
+     assert project.impact_statement() == "The Test Name project is currently active, reaching Test Benificaries people"
+
+
+
+"""
 We can format projects to strings nicely
 """
+
 def test_projects_format_nicely():
     project = Project(1, "Test Name", "Test Program_ID", "Test Benificaries", "Test Is_Active")
-    assert str(project) == "Project(1, Test Name, Test Program_ID, Test Benificaries, Test Is_Active)"
+    assert str(project) == "Project(1, 'Test Name', 'Test Program_ID', 'Test Benificaries', 'Test Is_Active')"
     
 
 """

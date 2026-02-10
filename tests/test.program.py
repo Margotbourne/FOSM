@@ -15,7 +15,7 @@ We can format programs to strings nicely
 """
 def test_programs_format_nicely():
     program = Program(1, "Test Name", "Test Description")
-    assert str(program) == "Program(1, Test Name, Test Program)"
+    assert str(program) == "Program(1, 'Test Name', 'Test Program')"
     
 
 """
