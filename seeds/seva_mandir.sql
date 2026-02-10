@@ -72,3 +72,40 @@ CREATE TABLE supporter (
   marketing_consent BOOLEAN NOT NULL,
   total_donated DECIMAL(12, 2) NOT NULL -- Good for currency
 );
+
+
+-- Insert Programs first (needed for Foreign Keys)
+INSERT INTO program (name, description) VALUES 
+('Education', 'Rural education programs for tribal children.'),
+('Health', 'Primary healthcare and nutrition services.');
+
+-- Insert Branches
+INSERT INTO branch (name, region_code, charity_number, address, email, currency) VALUES 
+('Udaipur Main', 'UDA-01', '12345', 'Old Fatehpura, Udaipur', 'info@sevamandir.org', 'INR');
+
+-- Insert People (Staff and Trustees)
+INSERT INTO person (name, email, role, bio, image_url) VALUES 
+('Anjali Devi', 'anjali@example.com', 'Program Coordinator', 'Expert in rural education.', 'anjali.jpg'),
+('Dr. Mohan', 'mohan@example.com', 'Trustee', 'Specialist in public health.', 'mohan.jpg');
+
+-- Insert Projects (linked to Programs)
+-- Program 1 is Education, Program 2 is Health
+INSERT INTO project (name, program_id, beneficiaries, is_active) VALUES 
+('Shikshantar School', 1, 150, TRUE),
+('Mobile Health Van', 2, 500, TRUE),
+('Bridge School 2023', 1, 45, FALSE);
+
+-- Insert News
+INSERT INTO news (title, content, publish_date, image_url) VALUES 
+('Dunkirk Commemoration', 'The position of the B.E.F had now become critical...', '1940-05-26', 'dunkirk.jpg'),
+('New School Opening', 'We are excited to announce a new school in Delwara.', '2024-02-10', 'school.jpg');
+
+-- Insert Reports
+INSERT INTO report (title, reporting_year, report_type, file_url, is_public) VALUES 
+('Annual Report 2023', 2023, 'Annual', 'report23.pdf', TRUE),
+('Internal Audit', 2024, 'Audit', 'audit.pdf', FALSE);
+
+-- Insert Supporters
+INSERT INTO supporter (name, email, is_gift_aid_eligible, marketing_consent, total_donated) VALUES 
+('Alice Smith', 'alice@test.com', TRUE, TRUE, 1200.00),
+('Bob Jones', 'bob@test.com', FALSE, TRUE, 50.00);
