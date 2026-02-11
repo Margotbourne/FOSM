@@ -1,4 +1,5 @@
 -- Drop existing tables (Order matters! Drop tables with foreign keys first)
+DROP TABLE IF EXISTS donations;
 DROP TABLE IF EXISTS project;
 DROP TABLE IF EXISTS branch;
 DROP TABLE IF EXISTS news;
@@ -76,6 +77,13 @@ CREATE TABLE supporter (
   total_donated DECIMAL(12, 2) NOT NULL -- Good for currency
 );
 
+CREATE TABLE donations (
+  id SERIAL PRIMARY KEY,
+  amount DECIMAL(12, 2) NOT NULL,
+  donation_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  supporter_id INTEGER REFERENCES supporter(id) ON DELETE CASCADE
+);
+
 
 -- Insert Programs first (needed for Foreign Keys)
 INSERT INTO program (name, description) VALUES 
@@ -112,3 +120,7 @@ INSERT INTO report (title, reporting_year, report_type, file_url, is_public) VAL
 INSERT INTO supporter (name, email, is_gift_aid_eligible, marketing_consent, total_donated) VALUES 
 ('Alice Smith', 'alice@test.com', TRUE, TRUE, 1200.00),
 ('Bob Jones', 'bob@test.com', FALSE, TRUE, 50.00);
+
+-- Insert Donations
+INSERT INTO donations (amount, supporter_id) VALUES (500.00, 1);
+INSERT INTO donations (amount, supporter_id) VALUES (700.00, 1);
