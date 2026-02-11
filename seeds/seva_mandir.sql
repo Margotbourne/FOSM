@@ -23,7 +23,7 @@ CREATE TABLE news (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
-  publish_date DATE NOT NULL, -- Using DATE to match your "YYYY-MM-DD" tests
+  publish_date DATE NOT NULL, 
   image_url TEXT
 );
 
