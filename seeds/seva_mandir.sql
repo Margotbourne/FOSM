@@ -49,8 +49,11 @@ CREATE TABLE project (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   program_id INTEGER REFERENCES program(id) ON DELETE CASCADE, -- Link to Program
-  beneficiaries INTEGER NOT NULL, -- Fixed spelling
-  is_active BOOLEAN NOT NULL DEFAULT TRUE
+  beneficiaries INTEGER NOT NULL, 
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  constraint fk_program foreign key(program_id)
+        references program(id)
+        on delete cascade
 );
 
 -- 6. Report Table
