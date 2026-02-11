@@ -68,21 +68,26 @@ CREATE TABLE report (
 );
 
 -- 7. Supporter Table
+-- Add is_active to Supporter
 CREATE TABLE supporter (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
   is_gift_aid_eligible BOOLEAN NOT NULL,
   marketing_consent BOOLEAN NOT NULL,
-  total_donated DECIMAL(12, 2) NOT NULL -- Good for currency
+  total_donated DECIMAL(12, 2) NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE -- <--- The new flag
 );
 
+-- Note: Donations don't need is_active because we 
+-- want to keep the money records linked to the supporter.
 CREATE TABLE donations (
   id SERIAL PRIMARY KEY,
   amount DECIMAL(12, 2) NOT NULL,
   donation_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  supporter_id INTEGER REFERENCES supporter(id) ON DELETE CASCADE
+  supporter_id INTEGER REFERENCES supporter(id) -- Keep as standard reference
 );
+
 
 
 -- Insert Programs first (needed for Foreign Keys)
