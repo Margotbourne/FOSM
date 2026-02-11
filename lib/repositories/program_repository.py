@@ -1,4 +1,5 @@
 from lib.models.program import Program
+from lib.models.project import Project
 
 class ProgramRepository:
     def __init__(self, connection):
@@ -19,7 +20,24 @@ class ProgramRepository:
         if not rows: return None
         row = rows[0]
         return Program(row["id"], row["name"], row["description"])
+    
+    def find_with_projects(self, program_id):
+        program = self.find(program_id)
+        if not program: return None
+        rows = self._connection.execute(
+        "SELECT * FROM project WHERE program_id = %s", [program_id]
+    )
 
+        program.projects = []
+        for row in rows:
+            project = Project(
+                row["id"], row["name"], row["program_id"], 
+                row["beneficiaries"], row["is_active"]
+            )
+            program.projects.append(project)
+        
+        return program
+    
     def create(self, program):
         self._connection.execute(
             'INSERT INTO program (name, description) VALUES (%s, %s)',
