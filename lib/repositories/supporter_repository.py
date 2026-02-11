@@ -48,3 +48,14 @@ class SupporterRepository:
             [supporter_id]
         )
         return None
+    
+
+    def update_total_donated(self, supporter_id):
+        query = "SELECT SUM(amount) AS total FROM donations WHERE supporter_id = %s"
+        result = self._connection.execute(query, [supporter_id])
+        new_total = result[0]["total"] or 0
+
+        self._connection.execute(
+            "UPDATE supporter SET total_donated = %s WHERE id = %s",
+            [new_total, supporter_id]
+    )

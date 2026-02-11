@@ -24,17 +24,18 @@ def test_delete_supporter(db_connection):
 def test_delete_supporter_preserves_donations(db_connection):
     db_connection.seed("seeds/seva_mandir.sql")
     supporter_repo = SupporterRepository(db_connection)
-    donation_repo = DonationRepository(db_connection)
+    donation_repo = DonationRepository(db_connection, supporter_repo)
     
-    # 1. Alice has 2 donations
-    assert len([d for d in donation_repo.all() if d.supporter_id == 1]) == 2
+    alice_donations = [d for d in donation_repo.all() if d.supporter_id == 1]
+    assert len(alice_donations) == 2
     
-    # 2. Soft delete Alice
+    # 2. Soft delete Alice (sets is_active to False)
     supporter_repo.delete(1)
     
-    # 3. VERIFY: The donations are STILL THERE (this is the preservation check)
+    # 3. VERIFY: The donations are PRESERVED in the database
     remaining_donations = [d for d in donation_repo.all() if d.supporter_id == 1]
-    assert len(remaining_donations) == 2  # This now passes because we WANT to keep them!
+    assert len(remaining_donations) == 2 
     
-    # 4. VERIFY: Alice is hidden from the active supporters list
-    assert all(s.id != 1 for s in supporter_repo.all())
+    # 4. VERIFY: Alice is hidden from the active supporters list (#all only returns is_active=True)
+    active_supporters = supporter_repo.all()
+    assert all(s.id != 1 for s in active_supporters)
