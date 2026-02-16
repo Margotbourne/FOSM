@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS donations;
 DROP TABLE IF EXISTS project;
 DROP TABLE IF EXISTS branch;
 DROP TABLE IF EXISTS news;
-DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS program;
 DROP TABLE IF EXISTS report;
 DROP TABLE IF EXISTS supporter;
@@ -28,15 +28,15 @@ CREATE TABLE news (
   image_url TEXT
 );
 
--- 3. Person Table
-CREATE TABLE person (
+-- 3. User Table
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  role TEXT NOT NULL,
-  bio TEXT NOT NULL,
-  image_url TEXT
+  email text NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- 4. Program Table
 CREATE TABLE program (
@@ -100,9 +100,14 @@ INSERT INTO branch (name, region_code, charity_number, address, email, currency)
 ('Udaipur Main', 'UDA-01', '12345', 'Old Fatehpura, Udaipur', 'info@sevamandir.org', 'INR');
 
 -- Insert People (Staff and Trustees)
-INSERT INTO person (name, email, role, bio, image_url) VALUES 
-('Anjali Devi', 'anjali@example.com', 'Program Coordinator', 'Expert in rural education.', 'anjali.jpg'),
-('Dr. Mohan', 'mohan@example.com', 'Trustee', 'Specialist in public health.', 'mohan.jpg');
+-- Seed users
+INSERT INTO users (name, email, password_hash) VALUES ('Tony Bourne', 'tonyb@example.com', 'hash_for_tony');
+INSERT INTO users (name, email, password_hash) VALUES ('Margot Bourne', 'margotb@example.com', 'phash_for_margot');
+INSERT INTO users (name, email, password_hash) VALUES ('Connie Bourne', 'connieb@example.com', 'hash_for_connie');
+INSERT INTO users (name, email, password_hash) VALUES ('Jane Bourne', 'janeb@example.com', 'hash_for_jane');
+INSERT INTO users (name, email, password_hash) VALUES ('Savanah Robertson', 'savanahr@example.com', 'hash_for_savanah');
+INSERT INTO users (name, email, password_hash) VALUES ('Jazzy Argues', 'jazzya@example.com', 'hash_for_jazzy');
+INSERT INTO users (name, email, password_hash) VALUES ('Testing Account', 'pytest@pytest.com', '$2b$12$QKinH9vWDAA4WVL6nSaMuO.1OQ5cCyZo5mu1KzCYVyeGBzZJYzt2y');
 
 -- Insert Projects (linked to Programs)
 -- Program 1 is Education, Program 2 is Health
@@ -129,3 +134,4 @@ INSERT INTO supporter (name, email, is_gift_aid_eligible, marketing_consent, tot
 -- Insert Donations
 INSERT INTO donations (amount, supporter_id) VALUES (500.00, 1);
 INSERT INTO donations (amount, supporter_id) VALUES (700.00, 1);
+
