@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="account-wrapper">
+    <section class="account-header">
+        <h1>Welcome back!</h1>
+        <p>Manage your account and view your support for Seva Mandir.</p>
+    </section>
+
+    <div class="account-grid">
+        <div class="card">
+            <h3>Profile Details</h3>
+            <p><strong>Email:</strong> admin@example.com</p>
+            <p><strong>Status:</strong> Active Supporter</p>
+            <button class="btn-secondary">Edit Profile</button>
+        </div>
+
+        <div class="card">
+            <h3>Recent Activity</h3>
+            <ul>
+                <li>Logged in: Today</li>
+                <li>Membership: Renewed Jan 2026</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

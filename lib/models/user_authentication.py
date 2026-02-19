@@ -12,7 +12,7 @@ def compare_password_hash(entered_password, hashed_password):
 
 def valid_password(password):
     special_chars = ['!', '@', "£", "$", "%"]
-    if len(password) < 7:
+    if len(password) < 8:
         return False
     else:
         has_special = False

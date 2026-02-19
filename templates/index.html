@@ -1,15 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>MakersBnB</title>
+{% extends "base.html" %}
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications-in-python/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/static/style.css" >
-    </head>
-    <body>
-        <p>This is the homepage.</p>
-    </body>
-</html>
+{% block content %}
+<div class="mission-grid">
+    <div class="grid-text main-intro">
+        <h3>Welcome</h3>
+        <p>The Friends of Seva Mandir UK support a world-renowned NGO working to improve the lives of half a million people in India.</p>
+    </div>
+    <div class="grid-photo">
+        <img src="/static/charity1.webp" alt="Education">
+    </div>
+    <div class="grid-text">
+        <h3>Education</h3>
+        <p>Thousands of children receive schooling to lift themselves out of grinding poverty.</p>
+    </div>
+
+    <div class="grid-photo">
+        <img src="/static/charity2.webp" alt="Nutrition">
+    </div>
+    
+    <div class="grid-text donate-tile">
+        <h3>Support Us</h3>
+        <p>Help us share our vision and improve lives in Rajasthan.</p>
+        <a href="/donate" class="btn-donate-grid">Donate Now</a>
+    </div>
+    <div class="grid-photo">
+        <img src="/static/charity3.webp" alt="Women Empowerment">
+    </div>
+
+    <div class="grid-text">
+        <h3>Empowerment</h3>
+        <p>Thousands of women are empowered to take control of their own lives.</p>
+    </div>
+    <div class="grid-photo">
+        <img src="/static/charity4.webp" alt="Farming">
+    </div>
+    <div class="grid-text highlight">
+        <h3>Nutrition & Health</h3>
+        <p>Thousands are helped to avoid or recover from life-threatening malnutrition.</p>
+    </div>
+
+    <div class="grid-photo">
+        <img src="/static/charity5.webp" alt="Community">
+    </div>
+    <div class="grid-text promise-tile">
+        <h3>Our Promise</h3>
+        <p>100% of funds raised go directly to Seva Mandir. Our work is entirely voluntary.</p>
+    </div>
+    <div class="grid-photo">
+        <img src="/static/charity6.webp" alt="Impact">
+    </div>
+</div>
+{% endblock %}

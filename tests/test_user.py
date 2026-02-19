@@ -1,6 +1,8 @@
 from lib.repositories.user_repository import UserRepository
+from lib.models.user_authentication import *
 from lib.models.user import User
 from datetime import datetime
+
 
 def test_get_all_users(db_connection):
     db_connection.seed("seeds/seva_mandir.sql")
@@ -63,5 +65,10 @@ def test_delete_user(db_connection):
     all_users = repository.all()
     
     assert len(all_users) == 6
-    
     assert all_users[0].name == 'Margot Bourne'
+
+def test_password_validation():
+    assert valid_password("Short1!") == False 
+    assert valid_password("LongEnoughButNoSpecial") == False
+    assert valid_password("ValidPass!") == True
+

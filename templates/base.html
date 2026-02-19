@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends of Seva Mandir</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="header">
+        
+        <ul>
+            <li class="logo">
+                <a class="logo-link" href="/index">
+                    <img class="logo-img" src="/static/FSMlogo.webp" alt="FSM logo">
+                    <p>Friends of Seva Mandir</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %} 
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="mailto:info@sevamandirfriends.org">Email</a> |
+                <a href="https://www.facebook.com/..." target="_blank" rel="noopener">Facebook</a> |
+                <a href="https://x.com/sevamandiruk" target="_blank" rel="noopener">Twitter</a> |
+                <a href="https://www.linkedin.com/company/..." target="_blank" rel="noopener">LinkedIn</a> |
+                <a href="https://www.instagram.com/..." target="_blank" rel="noopener">Instagram</a>
+            </div>
+            
+            <p>&copy; 2026 FOSM | Charity no: 328428</p>
+
+            <div class="admin-links">
+                {% if logged_in %}
+                     <a href="/account">Account</a> | 
+                     <a href="/logout">Logout</a>
+                {% else %}
+                     <a href="/login">Staff Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
