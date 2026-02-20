@@ -1,7 +1,7 @@
-/* ==========================================================================
-   BLOCK 1: GLOBAL (The Foundation)
-   NOTES: Use "color: inherit" and "text-decoration: none" to kill the blue.
-   ========================================================================== */
+/* ___UNIVERSAL___ */
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #b65744;
+    background-color: #faebeb;
     font-family: 'Segoe UI', Roboto, sans-serif;
     display: flex;
     flex-direction: column;
@@ -29,56 +29,168 @@ a {
     color: inherit;
 }
 
-/* 1. Set the Header as the main container */
+/* ___ HEADER___ */
+
 .header ul {
     display: flex;
-    align-items: center;    /* Vertically center everything */
-    justify-content: center; /* This will center the text */
+    align-items: center;
+    justify-content: space-between; 
     list-style: none;
-    padding: 0 40px;        /* Adds some breathing room on the sides */
+    padding: 0 40px;
     margin: 0;
-    position: relative;     /* Allows us to 'pin' the logo to the left */
-    height: 120px;          /* Give the header enough height for the big logo */
+    height: 120px;
+    background-color: #faebeb; 
 }
 
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+}
 
-/* 2. Pin the Logo to the left side */
 .logo-img {
-    position: absolute;     /* Takes it out of the center flow */
-    left: 40px;             /* Matches the padding of the header */
-    height: 100px;          /* Your 'much bigger' logo size */
+    height: 100px;
     width: auto;
 }
 
-/* 3. Style the centered text */
 .logo-link p {
-    color: #2D1B17;        
-    font-size: 5rem;        /* Nice and large for the center of the page */
+    color: #2D1B17;
+    font-family: 'Savate', serif !important;
+    font-size: 5rem; /* Scaled down slightly from 5rem to prevent overlap */
     font-weight: bold;
     margin: 0;
-    text-align: center;
+    white-space: nowrap; /* Prevents title from wrapping to two lines */
 }
 
-/* 4. Remove any default link styling */
-.logo-link {
-    text-decoration: none;
+
+.hamburger-menu {
+    display: none !important;
+    flex-direction: column;    
+    align-items: flex-start;   
+    gap: 15px;                
+    min-width: 180px;          /* Prevents the menu from being too skinny */
+
+}
+
+/* 2. When the 'active' class is added via JS, show the menu */
+.hamburger-menu.active {
+    display: flex !important;
+}
+
+.hamburger-dropdown {
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;            /* Forces the link to span the whole header */
-}
-
-/* Remove default bullet points and padding from the list */
-.header ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    min-width: 35px; /* Ensures space for the icon */
 }
 
 
-/* ==========================================================================
-   BLOCK 2: INDEX PAGE (The Grid)
-   NOTES: Images take up 100% of the square.
-   ========================================================================== */
+.hamburger-icon {
+    width: 35px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #2D1B17;
+    border-radius: 4px;
+}
+
+
+
+/* ___INDEX PAGE (The Grid)___ */
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevents accidental horizontal scrolling */
+}
+
+
+.horizontal-stripe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    /* THE BREAKOUT (to keep it edge-to-edge) */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    min-height: 500px; 
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.stripe-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.stripe-donate-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;        
+    background-color: #faebeb;
+    color: #2D1B17;
+}
+
+.stripe-donate-tile h2 {
+    font-size: 3.5rem;      
+    margin-bottom: 15px;
+    line-height: 1.1;
+    font-weight: 800;       
+}
+
+.stripe-donate-tile p {
+    font-size: 1.4rem;       
+    max-width: 500px;       
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.donate-button {
+    padding: 5px 50px;  
+    font-size: 2rem;       
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #046A38;
+    color: #faebeb;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Adds depth */
+}
+
+.tile-content {
+    max-width: 400px;
+}
+
+.donate-btn:hover {
+    background-color: #e84118;
+}
+
+
+.bottom-grid-container {
+  max-width: 1200px;       /* This keeps your second grid contained */
+  margin: 40px auto;       /* Centers it with space above */
+  padding: 0 20px;
+}
+
 .container {
     max-width: 1100px;
     margin: 40px auto;
@@ -105,7 +217,7 @@ a {
 }
 
 .grid-text h3 {
-    color: #3a4d2f; 
+    color: #046A38; 
     margin-bottom: 10px;
     text-transform: uppercase;
     font-size: 1.5rem;
@@ -127,7 +239,6 @@ a {
     padding: 0 !important;
 }
 
-
 .grid-text donate-tile {
     color: #f2dcd6 !important;
 }
@@ -139,34 +250,10 @@ a {
     display: block;
 }
 
-/* Center Donate Hub */
-.donate-tile {
-    background-color: #3a4d2f !important;
-    color: #f2dcd6 !important;
 
-}
-
-/* Targets the container and everything inside it */
-.donate-tile, 
-.donate-tile h3, 
-.donate-tile p, 
-.donate-tile .btn-donate-grid {
-    color: #f2dcd6 !important;
-}
+/* ___ LOGIN ___ */
 
 
-.btn-donate-grid {
-    background-color: #b65744;
-    color: #f2dcd6 !important;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-/* ==========================================================================
-   BLOCK 3: LOGIN PAGE (The Tonal Form)
-   ========================================================================== */
 
 .login-container {
     max-width: 650px;       
@@ -179,7 +266,6 @@ a {
     font-family: inherit; 
 }
 
-
 .login-container h2 {
     color: #2D1B17;
     margin-bottom: 40px;
@@ -189,11 +275,9 @@ a {
     font-size: 2.5rem;    
 }
 
-
 .form-group {
     margin-bottom: 30px; 
 }
-
 
 .form-group label {
     display: block;
@@ -202,7 +286,6 @@ a {
     margin-bottom: 12px;
     font-size: 1.2rem;      
 }
-
 
 .form-group input {
     width: 100%;
@@ -216,14 +299,12 @@ a {
     box-sizing: border-box; 
 }
 
-
 .button-center-wrapper {
     display: flex;
     justify-content: center; 
     width: 100%;
     margin-top: 30px;
 }
-
 
 button.btn-login {
     display: block !important;
@@ -246,9 +327,46 @@ button.btn-login {
 
 }
 
-/* ==========================================================================
-   BLOCK 4: FOOTER (The Bottom Bar)
-   ========================================================================== */
+
+/* ___ ACCOUNT PAGE ___*/
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    padding: 20px;
+    text-decoration: none; /* Removes underline from links */
+    color: #333;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.donations-tile { background-color: #f2dcd6;  }
+.friends-tile { background-color:  #f2dcd6;  }
+.planning-tile { background-color: #f2dcd6;  }
+.events-tile { background-color:  #f2dcd6;  }
+.reports-tile { background-color:  #f2dcd6;  }
+.calendar-tile { background-color:  #f2dcd6;  }
+
+.grid-item h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+/* ___ FOOTER ___ */
+
+
+
 footer {
     background-color: #b65744;
     color: #f2dcd6;
@@ -257,7 +375,6 @@ footer {
     margin-top: auto;
 }
 
-/* Footer links should be Saffron to stand out on Green */
 .footer-links a {
     color: #ff9933 !important;
     margin: 0 10px;

@@ -2,26 +2,41 @@
 
 {% block content %}
 <div class="account-wrapper">
+    
     <section class="account-header">
-        <h1>Welcome back!</h1>
-        <p>Manage your account and view your support for Seva Mandir.</p>
+        <h1>Welcome back, {{ user.name }}!</h1>
     </section>
 
-    <div class="account-grid">
-        <div class="card">
-            <h3>Profile Details</h3>
-            <p><strong>Email:</strong> admin@example.com</p>
-            <p><strong>Status:</strong> Active Supporter</p>
-            <button class="btn-secondary">Edit Profile</button>
-        </div>
+    <div class="mission-grid">
+        <a href="/donations" class="grid-item donations-tile">
+            <i class="fas fa-hand-holding-heart"></i> <h3>Donations</h3>
+        </a>
+        
+        <a href="/friends" class="grid-item friends-tile">
+            <i class="fas fa-users"></i>
+            <h3>Friends of Seva Mandir</h3>
+        </a>
+        
+        <a href="/planning" class="grid-item planning-tile">
+            <i class="fas fa-tasks"></i>
+            <h3>Project Planning</h3>
+        </a>
 
-        <div class="card">
-            <h3>Recent Activity</h3>
-            <ul>
-                <li>Logged in: Today</li>
-                <li>Membership: Renewed Jan 2026</li>
-            </ul>
-        </div>
+        <a href="/events" class="grid-item events-tile">
+            <i class="fas fa-calendar-star"></i>
+            <h3>Fundraiser Planning</h3>
+        </a>
+
+        <a href="/reports" class="grid-item reports-tile">
+            <i class="fas fa-chart-line"></i>
+            <h3>Reports</h3>
+        </a>
+
+        <a href="/calendar" class="grid-item calendar-tile">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Calendar</h3>
+        </a>
     </div>
-</div>
+
+</div> 
 {% endblock %}

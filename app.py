@@ -21,24 +21,30 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        if email == "admin@example.com" and password == "secret":
-            session['user_id'] = 1 
-            flash("Welcome back!") # This message shows up on the next page
+        connection = get_flask_database_connection(app)
+        repository = UserRepository(connection)
+        user = repository.find_by_email(email)
+
+        if user is not None and user.password_hash == password:
+            session['user_id'] = user.id  
             return redirect(url_for('account')) 
         else:
-            flash("Invalid email or password.") # Sends feedback
-            return redirect(url_for('login')) # Keeps them on the login page
+            flash("Invalid email or password.") 
+            return redirect(url_for('login')) 
 
     return render_template('login.html')
 
-@app.route('/account') 
+
+@app.route('/account')
 def account():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     
-    # You can pass user data here later
-    return render_template('account.html')
-
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    current_user = repository.find(session['user_id']) 
+    return render_template('account.html', user=current_user)
+   
 @app.route('/logout')
 def logout():
     session.clear() # Clears the entire session
