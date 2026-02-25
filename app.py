@@ -3,11 +3,23 @@ from flask import Flask, request, render_template, session, redirect, url_for
 from lib.database_connection import get_flask_database_connection
 from lib.repositories.user_repository import UserRepository
 from flask import flash 
+from flask import request, redirect, url_for
+from datetime import date
+from lib.models.gallery import GalleryPhoto
+from lib.repositories.gallery_repository import GalleryRepository
+from werkzeug.utils import secure_filename  # <--- Add this line
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+
+
+UPLOAD_FOLDER = 'static/gallery_uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 # --- THE MAGIC BIT ---
 # This makes 'logged_in' available in every HTML template automatically
 @app.context_processor
@@ -47,8 +59,71 @@ def account():
    
 @app.route('/logout')
 def logout():
-    session.clear() # Clears the entire session
+    session.clear() 
     return redirect(url_for('get_index'))
+
+
+@app.route('/need')
+def the_need():
+    return render_template('need.html') 
+
+
+
+@app.route('/gallery', methods=['GET'])
+def get_gallery():
+    connection = get_flask_database_connection(app)
+    repository = GalleryRepository(connection)
+    photos = repository.all()
+    return render_template('gallery.html', photos=photos)
+
+@app.route('/back_gallery', methods=['GET'])
+def back_gallery():
+    connection = get_flask_database_connection(app)
+    repository = GalleryRepository(connection)
+    photos = repository.all()
+    return render_template('back_gallery.html', photos=photos)
+
+@app.route('/upload-photo', methods=['POST'])
+def upload_photo():
+    connection = get_flask_database_connection(app)
+    repository = GalleryRepository(connection)
+
+    title = request.form.get('title')
+    caption = request.form.get('caption')
+    file = request.files.get('photo')
+
+    if file and file.filename != '':
+        # 1. Secure the filename and save the physical file
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # 2. Save the metadata to the database
+        new_photo = GalleryPhoto(None, title, caption, filename)
+        repository.add(new_photo)
+        
+        flash("Photo uploaded successfully!")
+        return redirect(url_for('back_gallery'))
+    
+    flash("No file selected.")
+    return redirect(request.referrer)
+
+
+@app.route('/gallery/delete/<int:id>', methods=['POST'])
+def delete_photo(id):
+    connection = get_flask_database_connection(app)
+    repository = GalleryRepository(connection)
+    repository.delete(id)
+    
+    flash("Photo deleted.")
+    return redirect(url_for('back_gallery'))
+
+
+
+
+
+
+
+
 
 @app.route('/')
 @app.route('/index')

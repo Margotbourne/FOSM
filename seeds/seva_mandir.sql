@@ -88,7 +88,14 @@ CREATE TABLE donations (
   supporter_id INTEGER REFERENCES supporter(id) -- Keep as standard reference
 );
 
-
+-- 8. Gallery Table
+CREATE TABLE gallery (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  caption TEXT,
+  filename TEXT NOT NULL, -- This stores the 'image.jpg' name
+  upload_date DATE NOT NULL DEFAULT CURRENT_DATE
+);
 
 -- Insert Programs first (needed for Foreign Keys)
 INSERT INTO program (name, description) VALUES 

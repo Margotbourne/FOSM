@@ -11,30 +11,21 @@
 </head>
 <body>
     <nav class="header">
-        <ul>
-            <li class="logo">
-                <a class="logo-link" href="/index">
-                    <img class="logo-img" src="/static/FSMlogo.webp" alt="FSM logo">
-                    <p>Friends of Seva Mandir</p>
-                </a>
-            </li>
-            <li class="hamburger-dropdown">
-            <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <ul class="hamburger-menu">
-                <li><a href="/education">News and Events</a></li>
-                <li><a href="/healthcare">Projects and Imapct</a></li>
-                <li><a href="/events">Gallery</a></li>
-            </ul>
-        </li>
-        </ul>
-        
-    </nav>
+        <a class="logo-link" href="/index">
+            <img class="logo-img" src="/static/FSMlogo.webp" alt="FSM logo">
+            <p>Friends of Seva Mandir</p>
+        </a>
 
+        <ul class="nav-links">
+            <li> <a href="/need">The Need</a>
+            <li><a href="/news_and_education">News and Events</a></li>
+            <li><a href="/projects_and_impact">Projects and Impact</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/get_involved">Get Involved and Donate</a></li>
+        </ul>
+    </nav>
+   
+   
     <main class="container">
         {% with messages = get_flashed_messages() %}
           {% if messages %}

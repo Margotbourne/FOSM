@@ -1,7 +1,4 @@
 /* ___UNIVERSAL___ */
-
-
-
 * {
     margin: 0;
     padding: 0;
@@ -10,97 +7,85 @@
 
 body {
     background-color: #faebeb;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    /* Apply the single font here */
+    font-family: 'Montserrat', sans-serif; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     color: #2D1B17;
 }
 
-/* --- THE FIX FOR BLUE LINKS --- */
-/* This tells the browser: "Do not make links blue or underlined" */
-a {
+
+
+/* ___ BUTTONS & TITLES ___ */
+/* Ensure all your buttons and grid titles use the same font weight logic */
+.stripe-donate-tile h2, .grid-text h3, .login-container h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.donate-button, .btn-login {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+}
+
+
+/* This forces ALL links to stay a specific color and removes underlines */
+a, a:visited, a:hover, a:active {
     text-decoration: none !important;
-    color: inherit !important; 
+     color: #046A38 !important; /* This uses your brand green */
 }
 
-/* This specifically targets links inside the footer or grid to ensure they stay green/saffron */
-.footer-links a, .grid-text a {
-    color: inherit;
-}
 
-/* ___ HEADER___ */
-
-.header ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    list-style: none;
-    padding: 0 40px;
-    margin: 0;
-    height: 120px;
-    background-color: #faebeb; 
+/* ___ HEADER ___ */
+.header {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0px;
 }
 
 .logo-link {
     display: flex;
     align-items: center;
-    gap: 20px;
-    text-decoration: none;
-}
-
-.logo-img {
-    height: 100px;
-    width: auto;
+    justify-content: center; /* Centers the title in the middle */
+    position: relative;
+    width: 100%;
+    min-height: 180px; 
+    text-decoration: none !important;
+    padding-left: 200px; 
+    padding-right: 200px;
 }
 
 .logo-link p {
-    color: #2D1B17;
-    font-family: 'Savate', serif !important;
-    font-size: 5rem; /* Scaled down slightly from 5rem to prevent overlap */
-    font-weight: bold;
+    font-size: 60px;   
+    font-weight: 800;     
+    color: #046A38;
     margin: 0;
-    white-space: nowrap; /* Prevents title from wrapping to two lines */
+    text-transform: uppercase;
+    text-align: center;
 }
 
-
-.hamburger-menu {
-    display: none !important;
-    flex-direction: column;    
-    align-items: flex-start;   
-    gap: 15px;                
-    min-width: 180px;          /* Prevents the menu from being too skinny */
-
+.logo-img {
+    height: 200px;       
+    width: auto;
+    position: absolute; 
+    left: 0;    
+    top: 50%;
+    transform: translateY(-50%); /* Perfectly centers image to the middle of the text */
 }
 
-/* 2. When the 'active' class is added via JS, show the menu */
-.hamburger-menu.active {
-    display: flex !important;
-}
-
-.hamburger-dropdown {
+.nav-links {
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-width: 35px; /* Ensures space for the icon */
+    gap: 50px;
+    margin-top: 10px; 
+    list-style: none;
+    font-weight: 500;
 }
 
-
-.hamburger-icon {
-    width: 35px;
-    height: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.hamburger-icon span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    background-color: #2D1B17;
-    border-radius: 4px;
+.nav-links a:hover {
+    color: #046A38 !important; /* Turns green when hovering */
 }
 
 
@@ -145,8 +130,8 @@ body {
     align-items: center;
     padding: 60px;        
     background-color: #faebeb;
-    color: #2D1B17;
-}
+    color: #046A38;
+} 
 
 .stripe-donate-tile h2 {
     font-size: 3.5rem;      
@@ -168,7 +153,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background-color: #046A38;
+    background-color: #492c26;
     color: #faebeb;
     border: none;
     cursor: pointer;
@@ -187,17 +172,17 @@ body {
 
 .bottom-grid-container {
   max-width: 1200px;       /* This keeps your second grid contained */
-  margin: 40px auto;       /* Centers it with space above */
+  margin: 24px auto;       /* Centers it with space above */
   padding: 0 20px;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 95%;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-.mission-grid {
+.mission-grid1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -253,18 +238,22 @@ body {
 
 /* ___ LOGIN ___ */
 
-
+.header-spacer {
+    height: 80px;
+    width: 100%;
+}
 
 .login-container {
     max-width: 650px;       
-    margin: 80px auto;      /* More space from the header */
+    margin: 450px auto 100px auto;     
     padding: 60px;          
     background-color: #f2dcd6; 
-    border: 3px solid #3a4d2f; /* Thicker border to match scale */
+    border: 3px solid #3a4d2f; 
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     font-family: inherit; 
 }
+
 
 .login-container h2 {
     color: #2D1B17;
@@ -328,56 +317,234 @@ button.btn-login {
 }
 
 
-/* ___ ACCOUNT PAGE ___*/
+/* ___ ACCOUNT PAGE ___ */
 
-.mission-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+.mission-grid2 {
+    max-width: 1200px;
+    margin: 40px auto;
     padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 30px; 
 }
+
+.account-header {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;      
+    margin-bottom: 15px; 
+}
+.account-header h1 {
+    font-size: 2.5rem;    
+    font-weight: 700;
+    color: #2D1B17;
+    text-transform: capitalize;
+}
+
 
 .grid-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 150px;
-    padding: 20px;
-    text-decoration: none; /* Removes underline from links */
-    color: #333;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 250px; /* Larger, taller boxes */
+    padding: 10px;
+    background-color: #f2dcd6;
+    border: 2px solid #3a4d2f;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    border: 1px solid #ddd;
 }
 
-.donations-tile { background-color: #f2dcd6;  }
-.friends-tile { background-color:  #f2dcd6;  }
-.planning-tile { background-color: #f2dcd6;  }
-.events-tile { background-color:  #f2dcd6;  }
-.reports-tile { background-color:  #f2dcd6;  }
-.calendar-tile { background-color:  #f2dcd6;  }
+.donations-tile, .friends-tile, .planning-tile, 
+.events-tile, .reports-tile, .calendar-tile { 
+    background-color: #faebeb;
+}
 
 .grid-item h3 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.5rem; 
+    color: #046A38;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+
+/* Hover Effect to make tiles feel interactive */
+.grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background-color: #ebd3cd;
+}
+
+/* ___NEED PAGE___*/
+
+.need-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px; 
+    color: #2D1B17;
+}
+
+.need-header {
+    text-align: left; 
+    max-width: 800px; 
+    width: 100%;      
+}
+
+
+.need-header h1 {
+    text-align: center;
+    margin-top: 40px;    
+    margin-bottom: 20px; 
+    font-size: 2rem;
+    color: #046A38;
+}
+
+.need-header p {
+    margin-bottom: 20px;
+    line-height: 1.6;  
+}
+
+.need-header ul {
+    margin-bottom: 20px;
+    padding-left: 20px; 
+}
+
+.need-header li {
+    margin-bottom: 10px; 
+}
+
+/* ___BACK GALLERY___ */
+/* Style the form within your existing layout */
+.upload-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input[type="text"], 
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #2c3e50; /* Match your brand color */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+    align-self: flex-start; /* Keeps the button from stretching too wide */
+}
+
+.btn-primary:hover {
+    background-color: #34495e;
+}
+/* ___ GALLERY ___*/
+
+.mission-grid3 {
+    display: grid !important; 
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+}
+
+.gallery-tile {
+    position: relative;
+    padding:0px !important;
+    background-color: #f2dcd6; 
+    border: 2px solid #3a4d2f;
+    border-radius: 15px;
+    padding: 15px;
+    height: 350px; 
+    overflow: hidden;
+}
+
+.gallery-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 10px;
+    display: block;
+}
+
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(45, 27, 23, 0.8); /* Semi-transparent dark brown */
+    color: #faebeb; /* Light text color */
+    padding: 15px;
+    transform: translateY(100%); /* Start hidden below the tile */
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+.photo-overlay p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* When the cursor hovers over the tile, slide the caption up */
+.gallery-tile:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+
+/* Forces the 'No Photos' message to take up the whole row */
+.empty-gallery-state {
+    grid-column: 1 / span 3; 
+    text-align: center;
+    padding: 60px;
+    background-color: #f2dcd6;
+    border: 2px dashed #3a4d2f;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.empty-gallery-state h3 {
+    color: #046A38;
+    text-transform: uppercase;
+}
+
+
+
+
 /* ___ FOOTER ___ */
 
 
-
 footer {
-    background-color: #b65744;
-    color: #f2dcd6;
+    background-color: #faebeb;
+    color: #046A38;
     padding: 40px 20px;
     text-align: center;
     margin-top: auto;
 }
 
-.footer-links a {
-    color: #ff9933 !important;
-    margin: 0 10px;
-    font-weight: bold;
-}
+
  
