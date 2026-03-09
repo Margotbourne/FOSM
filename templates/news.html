@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="account-header">
+    <h1>News & Events</h1>
+</div>
+
+<div class="mission-grid3">
+    {% for news_item in newses %}
+        <div class="news-card">
+            <div class="news-body">
+                <h2>{{ news_item.title }}</h2>
+                <p>{{ news_item.get_snippet() }}</p>
+                
+                <a href="{{ url_for('static', filename='news_uploads/' + news_item.image_url) }}" 
+                    class="read-more" 
+                    target="_blank">
+                    <div class="news-overlay">
+                        View Article
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <p>No news items found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

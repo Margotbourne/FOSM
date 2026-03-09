@@ -8,6 +8,10 @@ from datetime import date
 from lib.models.gallery import GalleryPhoto
 from lib.repositories.gallery_repository import GalleryRepository
 from werkzeug.utils import secure_filename  # <--- Add this line
+from lib.repositories.news_repository import NewsRepository
+from lib.models.news import News
+from werkzeug.utils import secure_filename 
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -118,11 +122,71 @@ def delete_photo(id):
     return redirect(url_for('back_gallery'))
 
 
+@app.route('/news')
+def get_news():
+    connection = get_flask_database_connection(app)
+    repository = NewsRepository(connection)
+    newses = repository.all() # Matches 'newses' in your HTML loop
+    return render_template('news.html', newses=newses)
 
+from werkzeug.utils import secure_filename
 
+# --- ADD THIS AT THE TOP ---
+# These are the only formats browsers can "view" directly
+ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# ---------------------------
 
+@app.route('/upload_news', methods=['POST'])
+def upload_news():
+    connection = get_flask_database_connection(app)
+    repository = NewsRepository(connection)
 
+    title = request.form.get('title')
+    content = request.form.get('content') or "Article Document"
+    file = request.files.get('news_image')
+
+    # CHECK: Does the file exist and is it a PDF/Image?
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        upload_folder = os.path.join(base_path, 'static', 'news_uploads')
+        
+        if not os.path.exists(upload_folder):
+            os.makedirs(upload_folder)
+            
+        file_path = os.path.join(upload_folder, filename)
+        file.save(file_path)
+        
+        new_item = News(None, title, content, datetime.now(), filename)
+        repository.create(new_item)
+        return redirect(url_for('back_news'))
+    
+    else:
+        # This runs if the file is a .docx or other non-viewable format
+        return "Invalid file type. Please upload a PDF or an Image so users can view it.", 400
+    
+# 3. THE BACK PAGE (Matches the URL you typed in browser)
+@app.route('/back_news')
+def back_news():
+    connection = get_flask_database_connection(app)
+    repository = NewsRepository(connection)
+    all_articles = repository.all()
+    # We change 'newses' to 'articles' to match your HTML loop
+    return render_template('back_news.html', articles=all_articles)
+
+# 5. DELETE ROUTE
+@app.route('/delete_news/<int:id>', methods=['POST'])
+def delete_news(id):
+    connection = get_flask_database_connection(app)
+    repository = NewsRepository(connection)
+    # repository.delete takes news_id, so we pass 'id'
+    repository.delete(id)
+    return redirect(url_for('back_news'))
 
 
 @app.route('/')

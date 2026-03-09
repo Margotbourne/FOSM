@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="need-wrapper">
+    <section class="upload-section">
+        <h2>Upload an Article</h2>
+        <form action="{{ url_for('upload_news') }}" method="POST" enctype="multipart/form-data" class="news-form">
+            <input type="text" name="title" placeholder="Article Title" required>
+            <textarea name="content" placeholder="Brief Description"></textarea>
+            <input type="file" name="news_image" required>
+            <button type="submit" class="btn-primary">Publish</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section class="existing-section">
+        <h2>Existing Articles</h2>
+        <div class="management-list">
+            {% for article in articles %}
+                <div class="management-item">
+                    <div class="article-details">
+                        <span class="article-title">{{ article.title }}</span>
+                        <span class="article-filename">({{ article.image_url }})</span>
+                    </div>
+                    
+                    <form action="{{ url_for('delete_news', id=article.id) }}" method="POST" onsubmit="return confirm('Delete this article?');">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            {% else %}
+                <p>No articles found.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
